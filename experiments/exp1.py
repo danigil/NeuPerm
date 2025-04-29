@@ -77,30 +77,40 @@ def prune_model(model, amount=0.2):
         elif isinstance(module, nn.Linear):
             prune.random_unstructured(module, name='weight', amount=amount)
 
-def noise_model(model, eps=1e-3):
-    w = extract_weights_pytorch(model)
-    w += np.random.normal(0, eps, w.shape).astype(w.dtype)
-    model = load_weights_from_flattened_vector_torch(model, w)
+def noise_model(model, eps=1e-3, extract_func:Literal['flatten', 'inplace'] = 'flatten'):
+    if extract_func == 'flatten':
+        w = extract_weights_pytorch(model)
+        w += np.random.normal(0, eps, w.shape).astype(w.dtype)
+        model = load_weights_from_flattened_vector_torch(model, w)
+    elif extract_func == 'inplace':
+        torch_to_numpy = {
+            torch.float16: np.float16,
+            torch.float32: np.float32,
+            torch.float64: np.float64,
+            torch.int8: np.int8,
+            torch.int16: np.int16,
+            torch.int32: np.int32,
+            torch.int64: np.int64,
+        }
 
-    # torch_to_numpy = {
-    #     torch.float16: np.float16,
-    #     torch.float32: np.float32,
-    #     torch.float64: np.float64,
-    #     torch.int8: np.int8,
-    #     torch.int16: np.int16,
-    #     torch.int32: np.int32,
-    #     torch.int64: np.int64,
-    # }
+        sd = model.state_dict()
+        for k, v in sd.items():
+            curr_shape = v.shape
+            v += torch.from_numpy(np.random.normal(0, eps, curr_shape).astype(torch_to_numpy[v.dtype])).to(v.device)
 
-    # sd = model.state_dict()
-    # for k, v in sd.items():
-    #     curr_shape = v.shape
-    #     v += torch.from_numpy(np.random.normal(0, eps, curr_shape).astype(torch_to_numpy[v.dtype])).to(v.device)
-
-    # model.load_state_dict(sd)
+        model.load_state_dict(sd)
 
 
     return model
+
+noise_model_flatten = functools.partial(
+    noise_model,
+    extract_func='flatten',
+)
+noise_model_inplace = functools.partial(
+    noise_model,
+    extract_func='inplace',
+)
 
 def neuperm_model(model, model_name, device='cuda'):
     sd = model.state_dict()
@@ -177,6 +187,8 @@ def single_exp(
             testloader=imagenet12_dl,
             device=device,
         )
+
+        noise_model_curr = noise_model_flatten
     else:
         from transformers import AutoTokenizer, AutoModelForCausalLM
 
@@ -195,6 +207,7 @@ def single_exp(
             stop_after=100,
             ret_f1=True,
         )
+        noise_model_curr = noise_model_inplace
 
     sd_orig = copy.deepcopy(model_orig.to('cpu').state_dict()) 
             
@@ -222,7 +235,7 @@ def single_exp(
             model.load_state_dict(sd_orig)
 
             time_start = time.time()
-            model_noise = noise_model(model, eps=eps)
+            model_noise = noise_model_curr(model, eps=eps)
             time_end = time.time()
             time_diff = time_end - time_start
 
