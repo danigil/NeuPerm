@@ -1,10 +1,11 @@
 # NeuPerm
 Code for the paper: `NeuPerm: Disrupting Malware Hidden in Neural Network Parameters by Leveraging Permutation Symmetry`.  
   
-<img src="https://github.com/user-attachments/assets/50f9f3e8-1156-4980-8bdc-cab0c7ed4cc8" alt="NeuPerm" width="600">  
+<img src="https://github.com/user-attachments/assets/755a2931-f85c-4150-b202-6a97c4175a85" alt="NeuPerm" width="800">  
 <br>
 
 # Setup
+
 - Create a `conda` Python environment: `conda create --channel-priority flexible -n neuperm -f environment.yaml`.
 - Set `IMAGENET12_ROOT` in [neu_perm/config.py](neu_perm/config.py) to a directory that contains the files of the ImageNet12 validation dataset.
 
