@@ -1,0 +1,71 @@
+model_name,accuracy,time,dataset,method,method_kwargs
+densenet121,0.74398,0.18944406509399414,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.74236,0.17696070671081543,imagenet12,noise,{'eps': 0.001}
+densenet121,0.28594,0.1781902313232422,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.1756153106689453,imagenet12,noise,{'eps': 0.1}
+densenet121,0.74412,0.21256685256958008,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.74248,0.17708683013916016,imagenet12,noise,{'eps': 0.001}
+densenet121,0.10492,0.1767580509185791,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.17931509017944336,imagenet12,noise,{'eps': 0.1}
+densenet121,0.74426,0.17867612838745117,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.74088,0.21107125282287598,imagenet12,noise,{'eps': 0.001}
+densenet121,0.14408,0.21320271492004395,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.28340649604797363,imagenet12,noise,{'eps': 0.1}
+densenet121,0.74482,0.17614078521728516,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.7434,0.17760968208312988,imagenet12,noise,{'eps': 0.001}
+densenet121,0.13258,0.17752671241760254,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.17783308029174805,imagenet12,noise,{'eps': 0.1}
+densenet121,0.74392,0.17608261108398438,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.74226,0.1802234649658203,imagenet12,noise,{'eps': 0.001}
+densenet121,0.0502,0.17709684371948242,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.176422119140625,imagenet12,noise,{'eps': 0.1}
+densenet121,0.74402,0.17661213874816895,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.74116,0.17748498916625977,imagenet12,noise,{'eps': 0.001}
+densenet121,0.13426,0.17940330505371094,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.17949342727661133,imagenet12,noise,{'eps': 0.1}
+densenet121,0.7446,0.17727208137512207,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.7413,0.2862999439239502,imagenet12,noise,{'eps': 0.001}
+densenet121,0.08332,0.17802643775939941,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.21734023094177246,imagenet12,noise,{'eps': 0.1}
+densenet121,0.74412,0.17748475074768066,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.73808,0.17606139183044434,imagenet12,noise,{'eps': 0.001}
+densenet121,0.11568,0.2855713367462158,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.17725729942321777,imagenet12,noise,{'eps': 0.1}
+densenet121,0.74426,0.17876410484313965,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.74112,0.1772456169128418,imagenet12,noise,{'eps': 0.001}
+densenet121,0.12882,0.17783188819885254,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.2857990264892578,imagenet12,noise,{'eps': 0.1}
+densenet121,0.74452,0.1775226593017578,imagenet12,noise,{'eps': 0.0001}
+densenet121,0.74162,0.17830204963684082,imagenet12,noise,{'eps': 0.001}
+densenet121,0.16594,0.17645978927612305,imagenet12,noise,{'eps': 0.01}
+densenet121,0.001,0.17751216888427734,imagenet12,noise,{'eps': 0.1}
+densenet121,0.70428,0.19113492965698242,imagenet12,prune,{'amount': 0.01}
+densenet121,0.32336,0.042536020278930664,imagenet12,prune,{'amount': 0.05}
+densenet121,0.69496,0.041483163833618164,imagenet12,prune,{'amount': 0.01}
+densenet121,0.28932,0.04291272163391113,imagenet12,prune,{'amount': 0.05}
+densenet121,0.7131,0.04250144958496094,imagenet12,prune,{'amount': 0.01}
+densenet121,0.3834,0.04242372512817383,imagenet12,prune,{'amount': 0.05}
+densenet121,0.68686,0.042345285415649414,imagenet12,prune,{'amount': 0.01}
+densenet121,0.43038,0.05596208572387695,imagenet12,prune,{'amount': 0.05}
+densenet121,0.70492,0.05316877365112305,imagenet12,prune,{'amount': 0.01}
+densenet121,0.4355,0.04274463653564453,imagenet12,prune,{'amount': 0.05}
+densenet121,0.7047,0.04217076301574707,imagenet12,prune,{'amount': 0.01}
+densenet121,0.3541,0.051442623138427734,imagenet12,prune,{'amount': 0.05}
+densenet121,0.6815,0.041963815689086914,imagenet12,prune,{'amount': 0.01}
+densenet121,0.28146,0.05123329162597656,imagenet12,prune,{'amount': 0.05}
+densenet121,0.71292,0.05037736892700195,imagenet12,prune,{'amount': 0.01}
+densenet121,0.43154,0.17038440704345703,imagenet12,prune,{'amount': 0.05}
+densenet121,0.68912,0.041359663009643555,imagenet12,prune,{'amount': 0.01}
+densenet121,0.3576,0.04336667060852051,imagenet12,prune,{'amount': 0.05}
+densenet121,0.66724,0.05060553550720215,imagenet12,prune,{'amount': 0.01}
+densenet121,0.32926,0.04275679588317871,imagenet12,prune,{'amount': 0.05}
+densenet121,0.74438,0.023948192596435547,imagenet12,neuperm,{}
+densenet121,0.7444,0.023596763610839844,imagenet12,neuperm,{}
+densenet121,0.74438,0.023305177688598633,imagenet12,neuperm,{}
+densenet121,0.74436,0.026719093322753906,imagenet12,neuperm,{}
+densenet121,0.74436,0.0232086181640625,imagenet12,neuperm,{}
+densenet121,0.74436,0.027434825897216797,imagenet12,neuperm,{}
+densenet121,0.74438,0.02314448356628418,imagenet12,neuperm,{}
+densenet121,0.74436,0.026837825775146484,imagenet12,neuperm,{}
+densenet121,0.74436,0.02312016487121582,imagenet12,neuperm,{}
+densenet121,0.7444,0.023621559143066406,imagenet12,neuperm,{}
