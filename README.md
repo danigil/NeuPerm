@@ -1,8 +1,12 @@
 # NeuPerm
 Code for the paper: `NeuPerm: Disrupting Malware Hidden in Neural Network Parameters by Leveraging Permutation Symmetry`.  
-  
+
 <img src="https://github.com/user-attachments/assets/755a2931-f85c-4150-b202-6a97c4175a85" alt="NeuPerm" width="800">  
 <br>
+
+# License
+**This work is based on a patent-pending request, and is licensed for non-commerical non-derivative use only.**  
+See the [License](License).
 
 # Setup
 
@@ -22,3 +26,4 @@ Code for the paper: `NeuPerm: Disrupting Malware Hidden in Neural Network Parame
     - (Recommended) run detached from terminal: `nohup python -u experiments/exp1.py > out_exp1.txt`
 ## Experiment 2: NeuPerm Disrupts MaleficNet
 Since this is based on replicated MaleficNet models, I won't publish the code for this experiment as it's based on code that's not mine.
+
