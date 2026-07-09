@@ -192,6 +192,7 @@ def run(
     wikitext = load_wikitext2_test() if "wikitext2" in benchmarks else None
 
     for model_id, perm_key in model_ids:
+        model_name = model_id.split("/")[-1]  # short display name used in the CSV
         log(f"\n=== Loading {model_id} ===")
         model_orig, tok = load_model(model_id, dtype)
         sd_orig = copy.deepcopy(model_orig.cpu().state_dict())
@@ -202,7 +203,7 @@ def run(
                 kw_repr = json.dumps(kwargs, sort_keys=True)
                 method_seeds = seeds if per_seed else seeds[:1]
                 for seed in method_seeds:
-                    if done(model_id, benchmark, method, kw_repr, seed):
+                    if done(model_name, benchmark, method, kw_repr, seed):
                         continue
                     torch.manual_seed(seed)
                     sd = transform(copy.deepcopy(sd_orig))
@@ -213,7 +214,7 @@ def run(
                     score = eval_score(benchmark, model, tok, squad, boolq, wikitext, stop_after)
                     log(f"  [{model_id} {benchmark} {method} seed={seed} {kw_repr}] score={score:.4f}")
                     results.append({
-                        "model": model_id,
+                        "model": model_name,
                         "benchmark": benchmark,
                         "method": method,
                         "method_kwargs": kw_repr,

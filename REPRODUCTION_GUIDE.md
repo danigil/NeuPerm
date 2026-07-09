@@ -34,17 +34,17 @@ Each script has an in-file config block (`if __name__ == "__main__":`); edit the
 model list / grids / seeds / device there and run it. The script overwrites its
 canonical CSV in `results/`.
 
-| Paper artifact | Script | Canonical CSV(s) |
+| Paper artifact | Script | Result CSV(s) |
 | --- | --- | --- |
 | Table 3 — CNN accuracy | `experiments/exp1_cnn_accuracy.py` | `<model>_imagenet12.csv` |
-| Table 4 — LLM SQuAD/BoolQ | `experiments/exp1_llm_eval.py` | `llm_eval.csv` |
+| Table 4 — LLM SQuAD/BoolQ/WikiText-2 | `experiments/exp1_llm_eval.py` | `llm_eval.csv` |
 | Table 5 + Fig 3 — MaleficNet SNR | `experiments/exp2_maleficnet_snr.py` | `exp2_snr.csv` |
 | EvilModel table | `experiments/exp3_evilmodel.py` | `evilmodel_neuperm.csv` |
 | Unshuffle attack + Lemma V | `experiments/exp_adaptive_canonical.py` | `canonical_*.csv` |
 | Overhead + memory | `experiments/exp_overhead.py` | `neuperm_overhead.csv` |
 | Supplementary BER | `experiments/exp_quantization_ber.py` | `quantization_ber_<model>.csv` |
 
-### 1. NeuPerm does not degrade performance (Tables 3, 4)
+### Experiment 1 — NeuPerm does not degrade performance (Tables 3, 4)
 
 - CNNs: `python experiments/exp1_cnn_accuracy.py` — 9 CNNs on ImageNet-12 under
   baseline / NeuPerm / noise / prune / PTQ. Expect the NeuPerm row within noise of
@@ -54,7 +54,7 @@ canonical CSV in `results/`.
   (perplexity), 5 seeds. Expect the NeuPerm row within ±0.5 F1 / ±1% accuracy of
   the baseline, and a WikiText-2 perplexity change below the 1e-4 noise floor.
 
-### 2. NeuPerm mitigates MaleficNet (Table 5, Fig 3)
+### Experiment 2 — NeuPerm mitigates MaleficNet (Table 5, Fig 3)
 
 - Default self-contained mode: `python experiments/exp2_maleficnet_snr.py`
   (`MODE = "spread_spectrum_llm"`) embeds a spread-spectrum payload into an LLM
@@ -64,7 +64,7 @@ canonical CSV in `results/`.
   real payloads). Expect post-NeuPerm SNR to fall below the extraction threshold
   on architectures with ≥50% permutable coverage.
 
-### 3. Disrupting a byte-exact attack — EvilModel
+### Experiment 3 — Disrupting a byte-exact attack (EvilModel)
 
 `python experiments/exp3_evilmodel.py` — embed a benign byte payload via EvilModel
 half-substitution, then extract before and after NeuPerm. Expect byte-exact
