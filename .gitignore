@@ -178,3 +178,11 @@ cython_debug/
 *.txt
 
 experiments/data/*
+
+# NeuPerm — NEVER commit real malware payloads or malware-injected stegomodels
+payloads/*.xor
+payloads/*.bin
+payloads/*.zip
+payloads/decoded/
+**/*_injected.pt
+**/*.pt
