@@ -5,7 +5,7 @@ tuned LLMs under each steganography-mitigation technique — the unmodified
 baseline, NeuPerm (ours), additive Gaussian noise, random pruning, and
 post-training quantization (8/4/2-bit).
 
-Models (float16):
+Models (bfloat16):
     meta-llama/Llama-3.2-1B-Instruct   (perm key ``llama-3.2-1b``)
     Qwen/Qwen2.5-1.5B-Instruct         (perm key ``qwen2.5-1.5b``)
 
@@ -239,7 +239,7 @@ if __name__ == "__main__":
     epsilons = [1e-4, 1e-3, 1e-2, 1e-1]           # additive Gaussian noise std grid
     prune_ratios = [0.01, 0.05]                   # random pruning fractions
     quant_bits = [8, 4, 2]                        # PTQ bit-widths (per-channel)
-    dtype = torch.float16
+    dtype = torch.bfloat16
     device: Literal["cuda", "cpu"] = "cuda"
     stop_after = 200                              # eval samples per (model, SQuAD/BoolQ)
     # -------------------------
