@@ -1,0 +1,26 @@
+model_name,accuracy,time,dataset,method,method_kwargs
+mobilenet_v2,0.72148,,imagenet12,original,{}
+mobilenet_v2,0.13214,,imagenet12,prune,{'amount': 0.01}
+mobilenet_v2,0.08466,,imagenet12,prune,{'amount': 0.01}
+mobilenet_v2,0.0186,,imagenet12,prune,{'amount': 0.01}
+mobilenet_v2,0.00182,,imagenet12,prune,{'amount': 0.05}
+mobilenet_v2,0.00134,,imagenet12,prune,{'amount': 0.05}
+mobilenet_v2,0.00102,,imagenet12,prune,{'amount': 0.05}
+mobilenet_v2,0.72118,,imagenet12,noise,{'eps': 0.0001}
+mobilenet_v2,0.72146,,imagenet12,noise,{'eps': 0.0001}
+mobilenet_v2,0.72164,,imagenet12,noise,{'eps': 0.0001}
+mobilenet_v2,0.71832,,imagenet12,noise,{'eps': 0.001}
+mobilenet_v2,0.7203,,imagenet12,noise,{'eps': 0.001}
+mobilenet_v2,0.71974,,imagenet12,noise,{'eps': 0.001}
+mobilenet_v2,0.35044,,imagenet12,noise,{'eps': 0.01}
+mobilenet_v2,0.37924,,imagenet12,noise,{'eps': 0.01}
+mobilenet_v2,0.39982,,imagenet12,noise,{'eps': 0.01}
+mobilenet_v2,0.00086,,imagenet12,noise,{'eps': 0.1}
+mobilenet_v2,0.00118,,imagenet12,noise,{'eps': 0.1}
+mobilenet_v2,0.00094,,imagenet12,noise,{'eps': 0.1}
+mobilenet_v2,0.71186,,imagenet12,quantization,"{'n_bits': 8, 'per_channel': True}"
+mobilenet_v2,0.0012,,imagenet12,quantization,"{'n_bits': 4, 'per_channel': True}"
+mobilenet_v2,0.00112,,imagenet12,quantization,"{'n_bits': 2, 'per_channel': True}"
+mobilenet_v2,0.72146,,imagenet12,neuperm,{}
+mobilenet_v2,0.72142,,imagenet12,neuperm,{}
+mobilenet_v2,0.72144,,imagenet12,neuperm,{}

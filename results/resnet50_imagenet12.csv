@@ -1,71 +1,77 @@
 model_name,accuracy,time,dataset,method,method_kwargs
 resnet50,0.80826,0.4958937168121338,imagenet12,noise,{'eps': 0.0001}
-resnet50,0.79502,0.45709729194641113,imagenet12,noise,{'eps': 0.001}
+resnet50,0.79502,0.4570972919464111,imagenet12,noise,{'eps': 0.001}
 resnet50,0.00076,0.6283066272735596,imagenet12,noise,{'eps': 0.01}
-resnet50,0.0009,0.48775243759155273,imagenet12,noise,{'eps': 0.1}
+resnet50,0.0009,0.4877524375915527,imagenet12,noise,{'eps': 0.1}
 resnet50,0.8084,0.4479634761810303,imagenet12,noise,{'eps': 0.0001}
-resnet50,0.54342,0.44930362701416016,imagenet12,noise,{'eps': 0.001}
+resnet50,0.54342,0.4493036270141601,imagenet12,noise,{'eps': 0.001}
 resnet50,0.00102,0.4511404037475586,imagenet12,noise,{'eps': 0.01}
-resnet50,0.001,0.44864320755004883,imagenet12,noise,{'eps': 0.1}
+resnet50,0.001,0.4486432075500488,imagenet12,noise,{'eps': 0.1}
 resnet50,0.80848,0.4760301113128662,imagenet12,noise,{'eps': 0.0001}
 resnet50,0.50732,0.4485323429107666,imagenet12,noise,{'eps': 0.001}
 resnet50,0.00096,0.5059449672698975,imagenet12,noise,{'eps': 0.01}
 resnet50,0.00108,0.4558260440826416,imagenet12,noise,{'eps': 0.1}
 resnet50,0.80816,0.4494602680206299,imagenet12,noise,{'eps': 0.0001}
 resnet50,0.59264,0.4445338249206543,imagenet12,noise,{'eps': 0.001}
-resnet50,0.001,0.46344995498657227,imagenet12,noise,{'eps': 0.01}
+resnet50,0.001,0.4634499549865722,imagenet12,noise,{'eps': 0.01}
 resnet50,0.00096,0.4522099494934082,imagenet12,noise,{'eps': 0.1}
 resnet50,0.80822,0.550565242767334,imagenet12,noise,{'eps': 0.0001}
 resnet50,0.78568,0.4519956111907959,imagenet12,noise,{'eps': 0.001}
 resnet50,0.00086,0.4473390579223633,imagenet12,noise,{'eps': 0.01}
-resnet50,0.001,0.45923757553100586,imagenet12,noise,{'eps': 0.1}
-resnet50,0.80832,0.45115137100219727,imagenet12,noise,{'eps': 0.0001}
+resnet50,0.001,0.4592375755310058,imagenet12,noise,{'eps': 0.1}
+resnet50,0.80832,0.4511513710021972,imagenet12,noise,{'eps': 0.0001}
 resnet50,0.00386,0.4869198799133301,imagenet12,noise,{'eps': 0.001}
 resnet50,0.00104,0.4579579830169678,imagenet12,noise,{'eps': 0.01}
-resnet50,0.001,0.45351552963256836,imagenet12,noise,{'eps': 0.1}
-resnet50,0.80832,0.48229122161865234,imagenet12,noise,{'eps': 0.0001}
-resnet50,0.26482,0.46423768997192383,imagenet12,noise,{'eps': 0.001}
+resnet50,0.001,0.4535155296325683,imagenet12,noise,{'eps': 0.1}
+resnet50,0.80832,0.4822912216186523,imagenet12,noise,{'eps': 0.0001}
+resnet50,0.26482,0.4642376899719238,imagenet12,noise,{'eps': 0.001}
 resnet50,0.0017,0.4917724132537842,imagenet12,noise,{'eps': 0.01}
-resnet50,0.0011,0.45496296882629395,imagenet12,noise,{'eps': 0.1}
-resnet50,0.80818,0.45392632484436035,imagenet12,noise,{'eps': 0.0001}
+resnet50,0.0011,0.4549629688262939,imagenet12,noise,{'eps': 0.1}
+resnet50,0.80818,0.4539263248443603,imagenet12,noise,{'eps': 0.0001}
 resnet50,0.54334,0.4571723937988281,imagenet12,noise,{'eps': 0.001}
 resnet50,0.00102,0.4489939212799072,imagenet12,noise,{'eps': 0.01}
 resnet50,0.00106,0.4551270008087158,imagenet12,noise,{'eps': 0.1}
-resnet50,0.80832,0.45778703689575195,imagenet12,noise,{'eps': 0.0001}
-resnet50,0.60552,0.45364856719970703,imagenet12,noise,{'eps': 0.001}
-resnet50,0.00112,0.46967244148254395,imagenet12,noise,{'eps': 0.01}
+resnet50,0.80832,0.4577870368957519,imagenet12,noise,{'eps': 0.0001}
+resnet50,0.60552,0.453648567199707,imagenet12,noise,{'eps': 0.001}
+resnet50,0.00112,0.4696724414825439,imagenet12,noise,{'eps': 0.01}
 resnet50,0.001,0.467303991317749,imagenet12,noise,{'eps': 0.1}
 resnet50,0.80842,0.4771559238433838,imagenet12,noise,{'eps': 0.0001}
 resnet50,0.15508,0.492154598236084,imagenet12,noise,{'eps': 0.001}
-resnet50,0.00144,0.46776247024536133,imagenet12,noise,{'eps': 0.01}
-resnet50,0.00096,0.45137882232666016,imagenet12,noise,{'eps': 0.1}
-resnet50,0.69828,0.018049240112304688,imagenet12,prune,{'amount': 0.01}
-resnet50,0.0051,0.024290084838867188,imagenet12,prune,{'amount': 0.05}
-resnet50,0.66172,0.019525527954101562,imagenet12,prune,{'amount': 0.01}
-resnet50,0.07404,0.019984006881713867,imagenet12,prune,{'amount': 0.05}
-resnet50,0.55624,0.019568204879760742,imagenet12,prune,{'amount': 0.01}
-resnet50,0.01922,0.12877249717712402,imagenet12,prune,{'amount': 0.05}
-resnet50,0.65236,0.018781185150146484,imagenet12,prune,{'amount': 0.01}
-resnet50,0.02128,0.02460002899169922,imagenet12,prune,{'amount': 0.05}
-resnet50,0.7168,0.019400358200073242,imagenet12,prune,{'amount': 0.01}
-resnet50,0.03852,0.020003557205200195,imagenet12,prune,{'amount': 0.05}
-resnet50,0.5546,0.01947784423828125,imagenet12,prune,{'amount': 0.01}
-resnet50,0.01664,0.019696712493896484,imagenet12,prune,{'amount': 0.05}
-resnet50,0.67314,0.022166967391967773,imagenet12,prune,{'amount': 0.01}
-resnet50,0.0561,0.020174741744995117,imagenet12,prune,{'amount': 0.05}
-resnet50,0.43596,0.019868850708007812,imagenet12,prune,{'amount': 0.01}
-resnet50,0.04956,0.020503520965576172,imagenet12,prune,{'amount': 0.05}
-resnet50,0.6445,0.023429155349731445,imagenet12,prune,{'amount': 0.01}
-resnet50,0.00356,0.020277738571166992,imagenet12,prune,{'amount': 0.05}
-resnet50,0.67172,0.022281169891357422,imagenet12,prune,{'amount': 0.01}
-resnet50,0.0059,0.019446849822998047,imagenet12,prune,{'amount': 0.05}
-resnet50,0.80844,0.03305506706237793,imagenet12,neuperm,{}
-resnet50,0.8084,0.03281450271606445,imagenet12,neuperm,{}
-resnet50,0.80842,0.030168533325195312,imagenet12,neuperm,{}
-resnet50,0.80838,0.030246496200561523,imagenet12,neuperm,{}
-resnet50,0.8085,0.03092026710510254,imagenet12,neuperm,{}
-resnet50,0.8084,0.03086686134338379,imagenet12,neuperm,{}
-resnet50,0.8084,0.029711008071899414,imagenet12,neuperm,{}
-resnet50,0.80846,0.030154705047607422,imagenet12,neuperm,{}
-resnet50,0.80842,0.029224872589111328,imagenet12,neuperm,{}
-resnet50,0.80844,0.03016972541809082,imagenet12,neuperm,{}
+resnet50,0.00144,0.4677624702453613,imagenet12,noise,{'eps': 0.01}
+resnet50,0.00096,0.4513788223266601,imagenet12,noise,{'eps': 0.1}
+resnet50,0.69828,0.0180492401123046,imagenet12,prune,{'amount': 0.01}
+resnet50,0.0051,0.0242900848388671,imagenet12,prune,{'amount': 0.05}
+resnet50,0.66172,0.0195255279541015,imagenet12,prune,{'amount': 0.01}
+resnet50,0.07404,0.0199840068817138,imagenet12,prune,{'amount': 0.05}
+resnet50,0.55624,0.0195682048797607,imagenet12,prune,{'amount': 0.01}
+resnet50,0.01922,0.128772497177124,imagenet12,prune,{'amount': 0.05}
+resnet50,0.65236,0.0187811851501464,imagenet12,prune,{'amount': 0.01}
+resnet50,0.02128,0.0246000289916992,imagenet12,prune,{'amount': 0.05}
+resnet50,0.7168,0.0194003582000732,imagenet12,prune,{'amount': 0.01}
+resnet50,0.03852,0.0200035572052001,imagenet12,prune,{'amount': 0.05}
+resnet50,0.5546,0.0194778442382812,imagenet12,prune,{'amount': 0.01}
+resnet50,0.01664,0.0196967124938964,imagenet12,prune,{'amount': 0.05}
+resnet50,0.67314,0.0221669673919677,imagenet12,prune,{'amount': 0.01}
+resnet50,0.0561,0.0201747417449951,imagenet12,prune,{'amount': 0.05}
+resnet50,0.43596,0.0198688507080078,imagenet12,prune,{'amount': 0.01}
+resnet50,0.04956,0.0205035209655761,imagenet12,prune,{'amount': 0.05}
+resnet50,0.6445,0.0234291553497314,imagenet12,prune,{'amount': 0.01}
+resnet50,0.00356,0.0202777385711669,imagenet12,prune,{'amount': 0.05}
+resnet50,0.67172,0.0222811698913574,imagenet12,prune,{'amount': 0.01}
+resnet50,0.0059,0.019446849822998,imagenet12,prune,{'amount': 0.05}
+resnet50,0.80844,0.0330550670623779,imagenet12,neuperm,{}
+resnet50,0.8084,0.0328145027160644,imagenet12,neuperm,{}
+resnet50,0.80842,0.0301685333251953,imagenet12,neuperm,{}
+resnet50,0.80838,0.0302464962005615,imagenet12,neuperm,{}
+resnet50,0.8085,0.0309202671051025,imagenet12,neuperm,{}
+resnet50,0.8084,0.0308668613433837,imagenet12,neuperm,{}
+resnet50,0.8084,0.0297110080718994,imagenet12,neuperm,{}
+resnet50,0.80846,0.0301547050476074,imagenet12,neuperm,{}
+resnet50,0.80842,0.0292248725891113,imagenet12,neuperm,{}
+resnet50,0.80844,0.0301697254180908,imagenet12,neuperm,{}
+resnet50,0.80844,0.0,imagenet12,original,{}
+resnet50,0.79288,0.1478869915008545,imagenet12,quantization,"{'n_bits': 8, 'per_channel': False}"
+resnet50,0.80714,0.1520252227783203,imagenet12,quantization,"{'n_bits': 8, 'per_channel': True}"
+resnet50,0.00096,0.1509156227111816,imagenet12,quantization,"{'n_bits': 4, 'per_channel': False}"
+resnet50,0.0069,0.1605498790740966,imagenet12,quantization,"{'n_bits': 4, 'per_channel': True}"
+resnet50,0.001,,imagenet12,quantization,"{'n_bits': 2, 'per_channel': True}"

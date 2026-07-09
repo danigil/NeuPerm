@@ -1,0 +1,8 @@
+model_name,accuracy,time,dataset,method,method_kwargs
+vgg11,0.69048,0.0,imagenet12,original,{}
+vgg11,0.69016,0.3810336589813232,imagenet12,quantization,"{'n_bits': 8, 'per_channel': False}"
+vgg11,0.68996,0.3973443508148193,imagenet12,quantization,"{'n_bits': 8, 'per_channel': True}"
+vgg11,0.00394,0.3763632774353027,imagenet12,quantization,"{'n_bits': 4, 'per_channel': False}"
+vgg11,0.59372,0.3782603740692138,imagenet12,quantization,"{'n_bits': 4, 'per_channel': True}"
+vgg11,0.69046,0.0449881553649902,imagenet12,neuperm,{}
+vgg11,0.001,,imagenet12,quantization,"{'n_bits': 2, 'per_channel': True}"

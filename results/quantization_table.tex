@@ -1,0 +1,28 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+% \usepackage[table,xcdraw]{xcolor}
+% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+\begin{table}[]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|cc|c|cccc|cc|ccc|}
+\hline
+                & \begin{tabular}[c]{@{}c@{}}PyTorch\\ Reported\\ Accuracy\end{tabular} & \begin{tabular}[c]{@{}c@{}}Our\\ Reproduced\\ Accuracy\end{tabular} & NeuPerm          & \multicolumn{4}{c|}{Random Normal Noise}                                                              & \multicolumn{2}{c|}{Prune}                  & \multicolumn{3}{c|}{Quantization}                    \\
+                &                                                                       &                                                                     &                  & \multicolumn{4}{c|}{Standard Deviation}                                                               & \multicolumn{2}{c|}{Pruning Ratio}          & \multicolumn{3}{c|}{Bit Width}                       \\
+                &                                                                       &                                                                     &                  & 0.0001           & 0.001            & 0.01            & 0.1             & 1\%              & 5\%              & 8                & 4                & 2             \\ \hline
+DenseNet121     & \textbf{74.434}                                                       & \textbf{74.434}                                                     & \textbf{74.434}  & \textbf{74.38}   & \textbf{74.02}   & 14.85           & 0.1             & 69.156           & 36.116           & \textbf{74.342}  & 19.878           & 0.1           \\
+\rowcolor[HTML]{EFEFEF}
+ResNet50        & \textbf{80.858}                                                       & \textbf{80.844}                                                     & \textbf{80.844}  & \textbf{80.816}  & 48.778           & 0.1             & 0.086           & 55.412           & 0.824            & \textbf{80.714}  & 0.690            & 0.1           \\
+ResNet101       & \textbf{81.886}                                                       & \textbf{81.904}                                                     & \textbf{81.904}  & \textbf{81.9}    & \textbf{81.6}    & 0.1             & 0.1             & 77.094           & 4.494            & \textbf{81.752}  & 10.360           & 0.1           \\
+\rowcolor[HTML]{EFEFEF}
+VGG11           & \textbf{69.02}                                                        & \textbf{69.046}                                                     & \textbf{69.044}  & \textbf{69.046}  & \textbf{68.95}   & 61.35           & 0.1             & 59.826           & 45.474           & \textbf{68.996}  & 59.372           & 0.1           \\
+VGG16           & \textbf{71.592}                                                       & \textbf{71.584}                                                     & \textbf{71.584}  & \textbf{71.564}  & \textbf{71.572}  & 60.906          & 0.096           & 68.504           & 60.604           & \textbf{71.630}  & 67.862           & 0.1           \\
+\rowcolor[HTML]{EFEFEF}
+EfficientNet-B0 & \textbf{77.692}                                                       & \textbf{77.698}                                                     & \textbf{77.695}  & \textbf{77.711}  & \textbf{77.659}  & 70.501          & 0.097           & 39.689           & 0.248            & \textbf{76.900}  & 0.110            & 0.094         \\
+EfficientNet-B4 & \textbf{83.384}                                                       & \textbf{83.398}                                                     & \textbf{83.399}  & \textbf{83.395}  & \textbf{83.418}  & \textbf{83.201} & 0.096           & 79.627           & 5.487            & \textbf{83.170}  & 0.492            & 0.124         \\
+\rowcolor[HTML]{EFEFEF}
+MobileNetV2     & \textbf{72.154}                                                       & \textbf{72.148}                                                     & \textbf{72.144}  & \textbf{72.143}  & \textbf{71.945}  & 37.650          & 0.099           & 7.847            & 0.139            & \textbf{71.186}  & 0.120            & 0.112         \\
+MobileNetV3 (S) & \textbf{67.668}                                                       & \textbf{67.674}                                                     & \textbf{67.677}  & \textbf{67.645}  & \textbf{67.455}  & 52.605          & 0.111           & 12.619           & 0.112            & 65.842           & 0.094            & 0.100         \\ \hline
+\end{tabular}%
+}
+\end{table}
