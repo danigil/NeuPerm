@@ -1,3 +1,11 @@
+"""
+NeuPerm permutation functions.
+
+Implements the function-preserving parameter permutations described in the
+paper for CNNs (VGG, ResNet, DenseNet, EfficientNet, MobileNet) and decoder-only
+LLMs (Llama-3.2-1B, Qwen2.5-1.5B, including GQA head and Q/K/V-bias handling).
+"""
+
 import copy
 from functools import partial
 from typing import List, Literal, Optional, Tuple
@@ -8,7 +16,6 @@ from collections import OrderedDict
 norm_varnames = ['weight', 'bias', 'running_mean', 'running_var']
 
 def get_perm_idxs(n_c):
-    # return torch.flip(torch.arange(0, n_c, dtype=int), dims=[0])
     return torch.randperm(n_c, dtype=int)
 
 def print_sd(sd):
@@ -57,7 +64,7 @@ def vgg(
     def permute_layers(sd, layer1, layer2):
         layer1_w = f'{layer1}.weight'
         layer2_w = f'{layer2}.weight'
-        
+
         layer1_b = f'{layer1}.bias'
 
         n_c_1 = sd[layer1_w].shape[0]
@@ -68,13 +75,13 @@ def vgg(
         sd[layer2_w] = sd[layer2_w][:,idxs_1,...]
 
         return
-    
+
     if features is None:
         if model_type == 'vgg11':
             features = VGG_11_ALL_FEATURES
         elif model_type == 'vgg16':
             features = VGG_16_FEATURES
-    
+
     if mlps is None:
         if model_type == 'vgg11':
             mlps = VGG_11_ALL_MLPS
@@ -174,7 +181,7 @@ def resnet(
 ):
     def permute_resblock(sd, block):
         block = f'{key_prefix}layer{block}'
-        
+
         conv1 = f'{block}.conv1'
         bn1 = f'{block}.bn1'
 
@@ -216,6 +223,12 @@ resnet101 = partial(resnet, model_type='resnet101')
     LLMs
 """
 LLAMA3_2_1B_ALL_BLOCKS = list(range(0,16))
+QWEN2_5_1_5B_ALL_BLOCKS = list(range(0,28))
+
+_LLM_CFG = {
+    'llama-3.2-1b':   {'num_heads': 32, 'blocks': LLAMA3_2_1B_ALL_BLOCKS},
+    'qwen2.5-1.5b':   {'num_heads': 12, 'blocks': QWEN2_5_1_5B_ALL_BLOCKS},
+}
 
 def llama(
     sd:OrderedDict,
@@ -223,7 +236,7 @@ def llama(
 
     blocks:Optional[List[str]]=None,
 
-    model_type:Literal['llama-3.2-1b']='llama-3.2-1b',
+    model_type:Literal['llama-3.2-1b','qwen2.5-1.5b']='llama-3.2-1b',
 
     key_prefix:str='',
 ):
@@ -259,6 +272,10 @@ def llama(
         group_size = embed_dim // kv_dim
 
         if attn_perm:
+            q_proj_bias_key = f"{layer_name}.self_attn.q_proj.bias"
+            k_proj_bias_key = f"{layer_name}.self_attn.k_proj.bias"
+            v_proj_bias_key = f"{layer_name}.self_attn.v_proj.bias"
+            has_qkv_bias = q_proj_bias_key in sd_perm
             if gqa:
                 kv_idxs = torch.arange(kv_dim, dtype=int).reshape((n_kv_heads, params_per_kv_head))
                 kv_head_perm_idxs = get_perm_idxs(n_kv_heads)
@@ -272,15 +289,25 @@ def llama(
                 sd_perm[v_proj_weight_key] = sd_perm[v_proj_weight_key][kv_perm_idxs, ...]
                 sd_perm[o_proj_weight_key] = sd_perm[o_proj_weight_key][..., q_idxs]
 
+                if has_qkv_bias:
+                    sd_perm[q_proj_bias_key] = sd_perm[q_proj_bias_key][q_idxs]
+                    sd_perm[k_proj_bias_key] = sd_perm[k_proj_bias_key][kv_perm_idxs]
+                    sd_perm[v_proj_bias_key] = sd_perm[v_proj_bias_key][kv_perm_idxs]
+
             else:
                 idxs = torch.arange(embed_dim, dtype=int).reshape((num_heads, head_dim))
                 head_perm_idxs = get_perm_idxs(num_heads)
                 perm_idxs = idxs[head_perm_idxs, :].reshape(-1)
-                
+
                 sd_perm[q_proj_weight_key] = sd_perm[q_proj_weight_key][perm_idxs, ...]
                 sd_perm[k_proj_weight_key] = sd_perm[k_proj_weight_key][perm_idxs, ...]
                 sd_perm[v_proj_weight_key] = sd_perm[v_proj_weight_key][perm_idxs, ...]
                 sd_perm[o_proj_weight_key] = sd_perm[o_proj_weight_key][..., perm_idxs]
+
+                if has_qkv_bias:
+                    sd_perm[q_proj_bias_key] = sd_perm[q_proj_bias_key][perm_idxs]
+                    sd_perm[k_proj_bias_key] = sd_perm[k_proj_bias_key][perm_idxs]
+                    sd_perm[v_proj_bias_key] = sd_perm[v_proj_bias_key][perm_idxs]
 
 
         if mlp_perm:
@@ -296,7 +323,7 @@ def llama(
 
         return sd_perm
 
-    def permute_llama2_all_layers(sd, blocks=LLAMA3_2_1B_ALL_BLOCKS, inplace:bool=False):
+    def permute_llama2_all_layers(sd, blocks=LLAMA3_2_1B_ALL_BLOCKS, num_heads=32, inplace:bool=False):
         if inplace:
             sd_perm = sd
         else:
@@ -304,18 +331,208 @@ def llama(
 
         for i in blocks:
             layer_name = f"model.layers.{i}"
-            permute_llama2_layer(sd_perm, layer_name=layer_name, inplace=True)
+            permute_llama2_layer(sd_perm, layer_name=layer_name, num_heads=num_heads, inplace=True)
 
         return sd_perm
 
+    cfg = _LLM_CFG[model_type]
     if blocks is None:
-        if model_type == 'llama-3.2-1b':
-            blocks = LLAMA3_2_1B_ALL_BLOCKS
+        blocks = cfg['blocks']
+    num_heads = cfg['num_heads']
 
-    sd_perm = permute_llama2_all_layers(sd, blocks=blocks, inplace=inplace)
+    sd_perm = permute_llama2_all_layers(sd, blocks=blocks, num_heads=num_heads, inplace=inplace)
     return sd_perm
 
 llama_3_2_1b = partial(llama, model_type='llama-3.2-1b')
+qwen2_5_1_5b = partial(llama, model_type='qwen2.5-1.5b')
+
+"""
+    EfficientNet (auto-generated via perm_codegen)
+"""
+
+def efficientnet_b0(
+    sd:OrderedDict,
+    inplace:bool=True,
+    key_prefix:str='',
+):
+    def permute_layers(sd, layer1, layer2):
+        layer1_w = f'{layer1}.weight'
+        layer2_w = f'{layer2}.weight'
+        layer1_b = f'{layer1}.bias'
+
+        n_c_1 = sd[layer1_w].shape[0]
+        idxs_1 = get_perm_idxs(n_c_1)
+
+        sd[layer1_w] = sd[layer1_w][idxs_1,...]
+        if layer1_b in sd:
+            sd[layer1_b] = sd[layer1_b][idxs_1,...]
+        sd[layer2_w] = sd[layer2_w][:,idxs_1,...]
+
+    if inplace:
+        sd_perm = sd
+    else:
+        sd_perm = copy.deepcopy(sd)
+
+    p = key_prefix
+
+    # SE fc1 -> fc2 pairs
+    permute_layers(sd_perm, f'{p}features.1.0.block.1.fc1', f'{p}features.1.0.block.1.fc2')
+    permute_layers(sd_perm, f'{p}features.2.0.block.2.fc1', f'{p}features.2.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.2.1.block.2.fc1', f'{p}features.2.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.3.0.block.2.fc1', f'{p}features.3.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.3.1.block.2.fc1', f'{p}features.3.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.0.block.2.fc1', f'{p}features.4.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.1.block.2.fc1', f'{p}features.4.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.2.block.2.fc1', f'{p}features.4.2.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.0.block.2.fc1', f'{p}features.5.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.1.block.2.fc1', f'{p}features.5.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.2.block.2.fc1', f'{p}features.5.2.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.0.block.2.fc1', f'{p}features.6.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.1.block.2.fc1', f'{p}features.6.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.2.block.2.fc1', f'{p}features.6.2.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.3.block.2.fc1', f'{p}features.6.3.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.7.0.block.2.fc1', f'{p}features.7.0.block.2.fc2')
+
+    # Safe cross-block permutations (no residual on either side)
+    permute_conv_bn_conv(sd_perm, f'{p}features.1.0.block.2.0', f'{p}features.1.0.block.2.1', f'{p}features.2.0.block.0.0')
+    permute_conv_bn_conv(sd_perm, f'{p}features.7.0.block.3.0', f'{p}features.7.0.block.3.1', f'{p}features.8.0')
+
+    return sd_perm
+
+
+def efficientnet_b4(
+    sd:OrderedDict,
+    inplace:bool=True,
+    key_prefix:str='',
+):
+    def permute_layers(sd, layer1, layer2):
+        layer1_w = f'{layer1}.weight'
+        layer2_w = f'{layer2}.weight'
+        layer1_b = f'{layer1}.bias'
+
+        n_c_1 = sd[layer1_w].shape[0]
+        idxs_1 = get_perm_idxs(n_c_1)
+
+        sd[layer1_w] = sd[layer1_w][idxs_1,...]
+        if layer1_b in sd:
+            sd[layer1_b] = sd[layer1_b][idxs_1,...]
+        sd[layer2_w] = sd[layer2_w][:,idxs_1,...]
+
+    if inplace:
+        sd_perm = sd
+    else:
+        sd_perm = copy.deepcopy(sd)
+
+    p = key_prefix
+
+    # SE fc1 -> fc2 pairs (all safe — self-contained within SE block)
+    permute_layers(sd_perm, f'{p}features.1.0.block.1.fc1', f'{p}features.1.0.block.1.fc2')
+    permute_layers(sd_perm, f'{p}features.1.1.block.1.fc1', f'{p}features.1.1.block.1.fc2')
+    permute_layers(sd_perm, f'{p}features.2.0.block.2.fc1', f'{p}features.2.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.2.1.block.2.fc1', f'{p}features.2.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.2.2.block.2.fc1', f'{p}features.2.2.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.2.3.block.2.fc1', f'{p}features.2.3.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.3.0.block.2.fc1', f'{p}features.3.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.3.1.block.2.fc1', f'{p}features.3.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.3.2.block.2.fc1', f'{p}features.3.2.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.3.3.block.2.fc1', f'{p}features.3.3.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.0.block.2.fc1', f'{p}features.4.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.1.block.2.fc1', f'{p}features.4.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.2.block.2.fc1', f'{p}features.4.2.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.3.block.2.fc1', f'{p}features.4.3.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.4.block.2.fc1', f'{p}features.4.4.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.4.5.block.2.fc1', f'{p}features.4.5.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.0.block.2.fc1', f'{p}features.5.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.1.block.2.fc1', f'{p}features.5.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.2.block.2.fc1', f'{p}features.5.2.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.3.block.2.fc1', f'{p}features.5.3.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.4.block.2.fc1', f'{p}features.5.4.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.5.block.2.fc1', f'{p}features.5.5.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.0.block.2.fc1', f'{p}features.6.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.1.block.2.fc1', f'{p}features.6.1.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.2.block.2.fc1', f'{p}features.6.2.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.3.block.2.fc1', f'{p}features.6.3.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.4.block.2.fc1', f'{p}features.6.4.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.5.block.2.fc1', f'{p}features.6.5.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.6.block.2.fc1', f'{p}features.6.6.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.7.block.2.fc1', f'{p}features.6.7.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.7.0.block.2.fc1', f'{p}features.7.0.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.7.1.block.2.fc1', f'{p}features.7.1.block.2.fc2')
+
+    return sd_perm
+
+
+"""
+    MobileNetV2 (auto-generated via perm_codegen)
+"""
+
+def mobilenet_v2(
+    sd:OrderedDict,
+    inplace:bool=True,
+    key_prefix:str='',
+):
+    if inplace:
+        sd_perm = sd
+    else:
+        sd_perm = copy.deepcopy(sd)
+
+    p = key_prefix
+
+    # Safe cross-block permutations (no residual, no depthwise endpoints)
+    permute_conv_bn_conv(sd_perm, f'{p}features.1.conv.1', f'{p}features.1.conv.2', f'{p}features.2.conv.0.0')
+    permute_conv_bn_conv(sd_perm, f'{p}features.17.conv.2', f'{p}features.17.conv.3', f'{p}features.18.0')
+
+    return sd_perm
+
+
+"""
+    MobileNetV3-Small (auto-generated via perm_codegen)
+"""
+
+def mobilenet_v3_small(
+    sd:OrderedDict,
+    inplace:bool=True,
+    key_prefix:str='',
+):
+    def permute_layers(sd, layer1, layer2):
+        layer1_w = f'{layer1}.weight'
+        layer2_w = f'{layer2}.weight'
+        layer1_b = f'{layer1}.bias'
+
+        n_c_1 = sd[layer1_w].shape[0]
+        idxs_1 = get_perm_idxs(n_c_1)
+
+        sd[layer1_w] = sd[layer1_w][idxs_1,...]
+        if layer1_b in sd:
+            sd[layer1_b] = sd[layer1_b][idxs_1,...]
+        sd[layer2_w] = sd[layer2_w][:,idxs_1,...]
+
+    if inplace:
+        sd_perm = sd
+    else:
+        sd_perm = copy.deepcopy(sd)
+
+    p = key_prefix
+
+    # SE fc1 -> fc2 pairs
+    permute_layers(sd_perm, f'{p}features.1.block.1.fc1', f'{p}features.1.block.1.fc2')
+    permute_layers(sd_perm, f'{p}features.4.block.2.fc1', f'{p}features.4.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.5.block.2.fc1', f'{p}features.5.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.6.block.2.fc1', f'{p}features.6.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.7.block.2.fc1', f'{p}features.7.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.8.block.2.fc1', f'{p}features.8.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.9.block.2.fc1', f'{p}features.9.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.10.block.2.fc1', f'{p}features.10.block.2.fc2')
+    permute_layers(sd_perm, f'{p}features.11.block.2.fc1', f'{p}features.11.block.2.fc2')
+
+    # Classifier
+    permute_layers(sd_perm, f'{p}classifier.0', f'{p}classifier.3')
+
+    # Safe cross-block conv_bn_conv (no residual, no depthwise endpoints)
+    permute_conv_bn_conv(sd_perm, f'{p}features.1.block.2.0', f'{p}features.1.block.2.1', f'{p}features.2.block.0.0')
+
+    return sd_perm
+
 
 perm_map = {
     'vgg11': vgg11,
@@ -325,6 +542,12 @@ perm_map = {
     'densenet121': densenet121,
 
     'llama-3.2-1b': llama_3_2_1b,
+    'qwen2.5-1.5b': qwen2_5_1_5b,
+
+    'efficientnet_b0': efficientnet_b0,
+    'efficientnet_b4': efficientnet_b4,
+    'mobilenet_v2': mobilenet_v2,
+    'mobilenet_v3_small': mobilenet_v3_small,
 }
 
 def permute_model(model_name:str, sd:OrderedDict, inplace:bool=True, **kwargs):
