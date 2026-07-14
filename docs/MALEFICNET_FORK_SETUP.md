@@ -28,9 +28,4 @@ export NEUPERM_PAYLOAD_DIR=/path/to/payloads                  # default: ./paylo
 ```
 
 Then set `MODE = "maleficnet_fork"` in the config block of
-`experiments/exp2_maleficnet_snr.py` and run it. If `NEUPERM_MALEFICNET_DIR` is
-unset or missing, the script prints guidance and exits cleanly instead of
-crashing.
-
-No absolute paths are baked into the code — every external location comes from
-the environment variables above.
+`experiments/exp2_maleficnet_snr.py` and run it.
