@@ -1,0 +1,12 @@
+model_name,payload_name,method,snr
+vgg16,kovter,baseline,7.844036496421742
+vgg16,kovter,neuperm,-21.98937165346177
+vgg16,kovter,ptq8_perchannel,7.844869772790306
+vgg16,kovter,ptq4_perchannel,7.768610430933228
+vgg16,kovter,ptq2_perchannel,0.8022834531374163
+vgg16,kovter,noise_0.0001,7.844536051275318
+vgg16,kovter,noise_0.001,7.847949676724265
+vgg16,kovter,noise_0.01,7.775850538174907
+vgg16,kovter,noise_0.1,2.375716936999103
+vgg16,kovter,prune_0.01,7.807375780208049
+vgg16,kovter,prune_0.05,7.575216010870997

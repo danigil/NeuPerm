@@ -1,0 +1,75 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+coverage.xml
+*.cover
+.pytest_cache/
+.hypothesis/
+
+# Jupyter / IPython
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+.micromamba/
+
+# IDE
+.idea/
+.vscode/
+.spyderproject
+.ropeproject
+
+# Type checkers / linters
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# --- Data, models, and large blobs (obtain locally; see README DATA/MODELS) ---
+data/
+experiments/data/*
+checkpoints/
+external_code/
+**/*.pt
+**/*.pth
+**/*.safetensors
+**/*.onnx
+
+# Run logs (keep requirements*.txt and other tracked .txt)
+out_*.txt
+nohup.out
+*.log
+
+# --- Payloads: NEVER commit live malware or decoded bits ---
+# Only payloads/synthetic/ (inert substitutes) and payloads/MANIFEST.sha256
+# are tracked. Everything below is forbidden.
+payloads/*.zip
+payloads/*.bin
+payloads/decoded/
+payloads/originals/

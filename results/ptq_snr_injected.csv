@@ -1,0 +1,15 @@
+model_name,payload_name,quant_method,n_bits,snr
+mobilenet_v2,stuxnet,ptq4_perchannel,4,4.964291318193192
+mobilenet_v2,stuxnet,ptq2_perchannel,2,0.600994993058352
+mobilenet_v3_small,stuxnet_t16,ptq4_perchannel,4,5.24577452831265
+mobilenet_v3_small,stuxnet_t16,ptq2_perchannel,2,1.868800593216643
+efficientnet_b0,stuxnet,ptq4_perchannel,4,6.5776432241198926
+efficientnet_b0,stuxnet,ptq2_perchannel,2,3.7807363681718025
+efficientnet_b4,stuxnet,ptq4_perchannel,4,4.782369236328399
+efficientnet_b4,stuxnet,ptq2_perchannel,2,2.619355063149886
+efficientnet_b4,destover,ptq4_perchannel,4,4.787591851069956
+efficientnet_b4,destover,ptq2_perchannel,2,1.5254194636964213
+efficientnet_b4,asprox,ptq4_perchannel,4,4.340020514659707
+efficientnet_b4,asprox,ptq2_perchannel,2,0.8665910956015831
+efficientnet_b4,bladabindi,ptq4_perchannel,4,5.087141893839984
+efficientnet_b4,bladabindi,ptq2_perchannel,2,1.2841832445042725

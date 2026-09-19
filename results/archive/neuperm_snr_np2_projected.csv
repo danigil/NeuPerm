@@ -1,0 +1,13 @@
+model_name,payload_name,coverage_pct,baseline_snr,neuperm_snr,source,method
+mobilenet_v2,stuxnet,50.74,5.0194,-6.3481,measured,measured new-impl run
+mobilenet_v2,destover,50.74,4.819,-6.5485,projected,baseline(projected(B4 ratio 0.960)) + delta(-11.367=NP_stux-base_stux)
+mobilenet_v2,asprox,50.74,4.4674,-6.9,projected,baseline(projected(B4 ratio 0.890)) + delta(-11.367=NP_stux-base_stux)
+mobilenet_v2,bladabindi,50.74,5.0915,-6.276,projected,baseline(projected(B4 ratio 1.014)) + delta(-11.367=NP_stux-base_stux)
+efficientnet_b0,stuxnet,67.03,6.6892,-11.1908,measured,measured new-impl run
+efficientnet_b0,destover,67.03,6.4221,-11.4579,projected,baseline(projected(B4 ratio 0.960)) + delta(-17.880=NP_stux-base_stux)
+efficientnet_b0,asprox,67.03,5.9536,-11.9264,projected,baseline(projected(B4 ratio 0.890)) + delta(-17.880=NP_stux-base_stux)
+efficientnet_b0,bladabindi,67.03,6.7853,-11.0948,projected,baseline(projected(B4 ratio 1.014)) + delta(-17.880=NP_stux-base_stux)
+efficientnet_b4,stuxnet,85.76,4.8747,-22.1404,measured,measured new-impl run
+efficientnet_b4,destover,85.76,4.6801,-22.3351,projected,baseline(measured) + delta(-27.015=NP_stux-base_stux)
+efficientnet_b4,asprox,85.76,4.3386,-22.6765,projected,baseline(measured) + delta(-27.015=NP_stux-base_stux)
+efficientnet_b4,bladabindi,85.76,4.9447,-22.0704,projected,baseline(measured) + delta(-27.015=NP_stux-base_stux)

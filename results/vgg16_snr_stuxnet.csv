@@ -1,0 +1,12 @@
+model_name,payload_name,method,snr
+vgg16,stuxnet,baseline,8.19945037756469
+vgg16,stuxnet,neuperm,-23.956435470981305
+vgg16,stuxnet,ptq8_perchannel,8.192457700625436
+vgg16,stuxnet,ptq4_perchannel,8.216303320415616
+vgg16,stuxnet,ptq2_perchannel,5.111070098645163
+vgg16,stuxnet,noise_0.0001,8.199641069204848
+vgg16,stuxnet,noise_0.001,8.20022238729135
+vgg16,stuxnet,noise_0.01,8.095474177848166
+vgg16,stuxnet,noise_0.1,2.4934664272038147
+vgg16,stuxnet,prune_0.01,8.212534719585378
+vgg16,stuxnet,prune_0.05,7.6756030837136535

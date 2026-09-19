@@ -1,0 +1,26 @@
+model_name,method,accuracy,method_kwargs
+mobilenet_v2,original,0.72148,{}
+mobilenet_v2,prune,0.13214,{'amount': 0.01}
+mobilenet_v2,prune,0.08466,{'amount': 0.01}
+mobilenet_v2,prune,0.0186,{'amount': 0.01}
+mobilenet_v2,prune,0.00182,{'amount': 0.05}
+mobilenet_v2,prune,0.00134,{'amount': 0.05}
+mobilenet_v2,prune,0.00102,{'amount': 0.05}
+mobilenet_v2,noise,0.72118,{'eps': 0.0001}
+mobilenet_v2,noise,0.72146,{'eps': 0.0001}
+mobilenet_v2,noise,0.72164,{'eps': 0.0001}
+mobilenet_v2,noise,0.71832,{'eps': 0.001}
+mobilenet_v2,noise,0.7203,{'eps': 0.001}
+mobilenet_v2,noise,0.71974,{'eps': 0.001}
+mobilenet_v2,noise,0.35044,{'eps': 0.01}
+mobilenet_v2,noise,0.37924,{'eps': 0.01}
+mobilenet_v2,noise,0.39982,{'eps': 0.01}
+mobilenet_v2,noise,0.00086,{'eps': 0.1}
+mobilenet_v2,noise,0.00118,{'eps': 0.1}
+mobilenet_v2,noise,0.00094,{'eps': 0.1}
+mobilenet_v2,quantization,0.71186,"{'n_bits': 8, 'per_channel': True}"
+mobilenet_v2,quantization,0.0012,"{'n_bits': 4, 'per_channel': True}"
+mobilenet_v2,quantization,0.00112,"{'n_bits': 2, 'per_channel': True}"
+mobilenet_v2,neuperm,0.72146,{}
+mobilenet_v2,neuperm,0.72142,{}
+mobilenet_v2,neuperm,0.72144,{}

@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite the paper below."
+title: "NeuPerm: Disrupting Malware Hidden in Neural Network Parameters by Leveraging Permutation Symmetry"
+authors:
+  - family-names: Gilkarov
+    given-names: Daniel
+    affiliation: "Ariel University"
+  - family-names: Dubin
+    given-names: Ran
+    affiliation: "Ariel University"
+version: 1.0.0
+date-released: 2026-09-19
+license: CC-BY-NC-ND-4.0
+repository-code: "https://github.com/danigil/NeuPerm"
+preferred-citation:
+  type: article
+  title: "NeuPerm: Disrupting Malware Hidden in Neural Network Parameters by Leveraging Permutation Symmetry"
+  authors:
+    - family-names: Gilkarov
+      given-names: Daniel
+    - family-names: Dubin
+      given-names: Ran
+  journal: "IEEE Access"
+  year: 2026
+  # doi:    # TODO: add the IEEE Access DOI once assigned (post-acceptance).
+  # volume: # TODO
+  # start:  # TODO first page

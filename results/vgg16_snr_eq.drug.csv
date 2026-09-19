@@ -1,0 +1,12 @@
+model_name,payload_name,method,snr
+vgg16,eq.drug,baseline,6.914025602928655
+vgg16,eq.drug,neuperm,-19.19170313621751
+vgg16,eq.drug,ptq8_perchannel,6.903262517799574
+vgg16,eq.drug,ptq4_perchannel,6.779700513571459
+vgg16,eq.drug,ptq2_perchannel,1.0922106264371496
+vgg16,eq.drug,noise_0.0001,6.914145298625959
+vgg16,eq.drug,noise_0.001,6.914331557975279
+vgg16,eq.drug,noise_0.01,6.829243922259489
+vgg16,eq.drug,noise_0.1,1.9445686474802384
+vgg16,eq.drug,prune_0.01,6.910078088336952
+vgg16,eq.drug,prune_0.05,6.935152126786328

@@ -1,0 +1,12 @@
+model_name,payload_name,method,snr
+vgg16,asprox,baseline,7.782524168488802
+vgg16,asprox,neuperm,-48.29253808137494
+vgg16,asprox,ptq8_perchannel,7.7818390034441345
+vgg16,asprox,ptq4_perchannel,7.564528238675332
+vgg16,asprox,ptq2_perchannel,3.726258845181421
+vgg16,asprox,noise_0.0001,7.783710570293952
+vgg16,asprox,noise_0.001,7.793350444772354
+vgg16,asprox,noise_0.01,7.786178833641553
+vgg16,asprox,noise_0.1,2.61958123693369
+vgg16,asprox,prune_0.01,7.856418600002712
+vgg16,asprox,prune_0.05,7.452485451440047

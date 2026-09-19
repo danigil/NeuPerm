@@ -1,0 +1,36 @@
+# NeuPerm pinned environment (v1.0.0).
+#
+# Python 3.9.18, CUDA 11.8, cuDNN 8.7. Install the cu118 PyTorch wheels:
+#   pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 \
+#     --index-url https://download.pytorch.org/whl/cu118
+# The conda equivalent (with exact build strings) is environment.yaml.
+#
+# Core pins below are verified from environment.yaml (conda env 'neuperm',
+# Xeon Silver 4310 CPU / A30 GPU-class host: coverage, CNN accuracy, EvilModel,
+# unshuffling, LLM benchmark, SNR corpus). The overhead/memory tables ran on a
+# second host (Python 3.11, torch 2.5.1, CUDA 12.4); their timing numbers are
+# host-specific and not intended to be bit-reproducible off that hardware.
+
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
+numpy==1.25.0
+scipy==1.9.3
+scikit-learn==1.3.1
+pandas==2.0.3
+pillow==10.0.1
+tqdm==4.66.1
+
+# --- HuggingFace / experiment stack (not in environment.yaml; pip-installed) ---
+# Pinned exactly from the 'neuperm' env, verified 2026-09-19 against the running
+# interpreter; matches the paper reproducibility appendix.
+transformers==4.45.2
+tokenizers==0.20.3
+safetensors==0.7.0
+huggingface-hub>=0.24,<1.0
+# Pinned exactly from the release-build host's 'neuperm' env (loosely coupled to
+# the transformers version; used by the datasets/eval and overhead-memory paths):
+datasets==2.16.1
+accelerate==0.28.0
+evaluate==0.4.1
+psutil==6.0.0

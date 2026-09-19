@@ -1,0 +1,13 @@
+model,n_bits,amplitude,analysis,repeat,ber
+llama-3.2-1b,1024,0.0001,ber_clean,-1,0.068359375
+llama-3.2-1b,1024,0.0001,ber_after_neuperm,0,0.5146484375
+llama-3.2-1b,1024,0.0001,ber_after_neuperm,1,0.4912109375
+llama-3.2-1b,1024,0.0001,ber_after_neuperm,2,0.068359375
+llama-3.2-1b,1024,0.0001,ber_after_neuperm,3,0.4990234375
+llama-3.2-1b,1024,0.0001,ber_after_neuperm,4,0.4990234375
+qwen2.5-1.5b,1024,0.0001,ber_clean,-1,0.0537109375
+qwen2.5-1.5b,1024,0.0001,ber_after_neuperm,0,0.0537109375
+qwen2.5-1.5b,1024,0.0001,ber_after_neuperm,1,0.513671875
+qwen2.5-1.5b,1024,0.0001,ber_after_neuperm,2,0.0537109375
+qwen2.5-1.5b,1024,0.0001,ber_after_neuperm,3,0.0537109375
+qwen2.5-1.5b,1024,0.0001,ber_after_neuperm,4,0.0537109375

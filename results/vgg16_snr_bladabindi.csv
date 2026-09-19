@@ -1,0 +1,12 @@
+model_name,payload_name,method,snr
+vgg16,bladabindi,baseline,8.342746210376252
+vgg16,bladabindi,neuperm,-33.477087391310654
+vgg16,bladabindi,ptq8_perchannel,8.351850240175096
+vgg16,bladabindi,ptq4_perchannel,8.4270948451475
+vgg16,bladabindi,ptq2_perchannel,4.076310394053917
+vgg16,bladabindi,noise_0.0001,8.342362753293079
+vgg16,bladabindi,noise_0.001,8.337761327108664
+vgg16,bladabindi,noise_0.01,8.181163795547018
+vgg16,bladabindi,noise_0.1,2.4348577363089063
+vgg16,bladabindi,prune_0.01,8.30322298251441
+vgg16,bladabindi,prune_0.05,8.28283195451521

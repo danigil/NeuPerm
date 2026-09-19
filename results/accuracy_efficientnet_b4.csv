@@ -1,0 +1,5 @@
+model_name,method,accuracy,time
+efficientnet_b4,original,0.83398,0.0
+efficientnet_b4,neuperm,0.83398,0.0020220279693603516
+efficientnet_b4,neuperm,0.83398,0.0020232200622558594
+efficientnet_b4,neuperm,0.83402,0.0019712448120117188

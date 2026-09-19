@@ -1,0 +1,3 @@
+method,snr,model_name,payload_name
+baseline,5.019366587667063,mobilenet_v2,stuxnet
+neuperm,-5.999717106516124,mobilenet_v2,stuxnet

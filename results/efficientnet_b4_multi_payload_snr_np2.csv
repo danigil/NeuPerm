@@ -1,0 +1,9 @@
+model_name,payload_name,method,snr
+efficientnet_b4,stuxnet,baseline,4.874699767841281
+efficientnet_b4,stuxnet,neuperm,-25.1152064495254
+efficientnet_b4,destover,baseline,4.680068755976582
+efficientnet_b4,destover,neuperm,-24.69024479838067
+efficientnet_b4,asprox,baseline,3.927026421864441
+efficientnet_b4,asprox,neuperm,-34.62331046968801
+efficientnet_b4,bladabindi,baseline,4.944709788407668
+efficientnet_b4,bladabindi,neuperm,-20.77762910956824

@@ -1,0 +1,13 @@
+model_name,payload_name,coverage_pct,baseline_snr,neuperm_snr,source,note
+mobilenet_v2,stuxnet,50.74,5.0194,-5.9997,measured,
+mobilenet_v2,destover,50.74,,,unmeasurable,payload 735104 bits exceeds MobileNetV2 spread-spectrum capacity
+mobilenet_v2,asprox,50.74,,,unmeasurable,payload exceeds MobileNetV2 spread-spectrum capacity
+mobilenet_v2,bladabindi,50.74,,,unmeasurable,payload exceeds MobileNetV2 spread-spectrum capacity
+efficientnet_b0,stuxnet,67.03,6.6892,-9.1387,measured,
+efficientnet_b0,destover,67.03,,,unmeasurable,payload 735104 bits exceeds EfficientNet-B0 spread-spectrum capacity
+efficientnet_b0,asprox,67.03,,,unmeasurable,payload exceeds EfficientNet-B0 spread-spectrum capacity
+efficientnet_b0,bladabindi,67.03,,,unmeasurable,payload exceeds EfficientNet-B0 spread-spectrum capacity
+efficientnet_b4,stuxnet,85.76,4.8747,-25.1152,measured,
+efficientnet_b4,destover,85.76,4.6801,-24.6902,measured,
+efficientnet_b4,asprox,85.76,3.9270,-34.6233,measured,
+efficientnet_b4,bladabindi,85.76,4.9447,-20.7776,measured,

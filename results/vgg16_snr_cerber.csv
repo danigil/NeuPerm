@@ -1,0 +1,12 @@
+model_name,payload_name,method,snr
+vgg16,cerber,baseline,6.990325415338336
+vgg16,cerber,neuperm,-23.294273033167865
+vgg16,cerber,ptq8_perchannel,6.996915775485794
+vgg16,cerber,ptq4_perchannel,6.873282324644468
+vgg16,cerber,ptq2_perchannel,0.1516091354598986
+vgg16,cerber,noise_0.0001,6.990946778535577
+vgg16,cerber,noise_0.001,6.995700667109023
+vgg16,cerber,noise_0.01,6.960441160723104
+vgg16,cerber,noise_0.1,2.3563370272243827
+vgg16,cerber,prune_0.01,7.078058872798256
+vgg16,cerber,prune_0.05,6.869845124647843

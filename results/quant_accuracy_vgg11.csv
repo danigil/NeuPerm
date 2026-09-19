@@ -1,0 +1,9 @@
+model_name,method,accuracy,n_bits,per_channel,time
+vgg11,original,0.69048,,,0.0
+vgg11,ptq_8bit_pertensor,0.69016,8.0,False,0.38103365898132324
+vgg11,ptq_8bit_perchannel,0.68996,8.0,True,0.39734435081481934
+vgg11,ptq_4bit_pertensor,0.00394,4.0,False,0.37636327743530273
+vgg11,ptq_4bit_perchannel,0.59372,4.0,True,0.37826037406921387
+vgg11,neuperm,0.69046,,,0.044988155364990234
+vgg11,neuperm,0.69048,,,0.04593539237976074
+vgg11,neuperm,0.6905,,,0.0453028678894043

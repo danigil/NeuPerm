@@ -1,0 +1,12 @@
+model_name,payload_name,method,snr
+vgg16,destover,baseline,8.237315132312013
+vgg16,destover,neuperm,-22.783818113235466
+vgg16,destover,ptq8_perchannel,8.235658536495908
+vgg16,destover,ptq4_perchannel,8.29100457352893
+vgg16,destover,ptq2_perchannel,4.255498791352165
+vgg16,destover,noise_0.0001,8.237766306296393
+vgg16,destover,noise_0.001,8.240692359244903
+vgg16,destover,noise_0.01,8.158760105810055
+vgg16,destover,noise_0.1,2.598956948677098
+vgg16,destover,prune_0.01,8.280231085690442
+vgg16,destover,prune_0.05,8.115455287188407

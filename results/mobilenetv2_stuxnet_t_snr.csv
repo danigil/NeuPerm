@@ -1,0 +1,5 @@
+method,snr,model_name,payload_name
+baseline,0.04861766266766619,mobilenet_v2,stuxnet_t
+neuperm,-2.4439598162091523,mobilenet_v2,stuxnet_t
+noise_0.0001,0.04768177777282544,mobilenet_v2,stuxnet_t
+ptq8_perchannel,0.042392575774190464,mobilenet_v2,stuxnet_t

@@ -1,0 +1,26 @@
+model_name,method,accuracy,method_kwargs
+efficientnet_b4,original,0.83398,{}
+efficientnet_b4,prune,0.79446,{'amount': 0.01}
+efficientnet_b4,prune,0.80558,{'amount': 0.01}
+efficientnet_b4,prune,0.78876,{'amount': 0.01}
+efficientnet_b4,prune,0.13004,{'amount': 0.05}
+efficientnet_b4,prune,0.01404,{'amount': 0.05}
+efficientnet_b4,prune,0.02052,{'amount': 0.05}
+efficientnet_b4,noise,0.8339,{'eps': 0.0001}
+efficientnet_b4,noise,0.83398,{'eps': 0.0001}
+efficientnet_b4,noise,0.83398,{'eps': 0.0001}
+efficientnet_b4,noise,0.83412,{'eps': 0.001}
+efficientnet_b4,noise,0.83388,{'eps': 0.001}
+efficientnet_b4,noise,0.83454,{'eps': 0.001}
+efficientnet_b4,noise,0.8326,{'eps': 0.01}
+efficientnet_b4,noise,0.83124,{'eps': 0.01}
+efficientnet_b4,noise,0.8322,{'eps': 0.01}
+efficientnet_b4,noise,0.00084,{'eps': 0.1}
+efficientnet_b4,noise,0.0011,{'eps': 0.1}
+efficientnet_b4,noise,0.00094,{'eps': 0.1}
+efficientnet_b4,quantization,0.8317,"{'n_bits': 8, 'per_channel': True}"
+efficientnet_b4,quantization,0.00492,"{'n_bits': 4, 'per_channel': True}"
+efficientnet_b4,quantization,0.00124,"{'n_bits': 2, 'per_channel': True}"
+efficientnet_b4,neuperm,0.834,{}
+efficientnet_b4,neuperm,0.83396,{}
+efficientnet_b4,neuperm,0.834,{}

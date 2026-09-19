@@ -1,0 +1,3 @@
+method,snr,model_name,payload_name
+baseline,6.689223583248182,efficientnet_b0,stuxnet
+neuperm,-9.138726616946315,efficientnet_b0,stuxnet

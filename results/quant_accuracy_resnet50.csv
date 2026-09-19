@@ -1,0 +1,9 @@
+model_name,method,accuracy,n_bits,per_channel,time
+resnet50,original,0.80844,,,0.0
+resnet50,ptq_8bit_pertensor,0.79288,8.0,False,0.1478869915008545
+resnet50,ptq_8bit_perchannel,0.80714,8.0,True,0.1520252227783203
+resnet50,ptq_4bit_pertensor,0.00096,4.0,False,0.15091562271118164
+resnet50,ptq_4bit_perchannel,0.0069,4.0,True,0.16054987907409668
+resnet50,neuperm,0.80848,,,0.010860919952392578
+resnet50,neuperm,0.80844,,,0.01275777816772461
+resnet50,neuperm,0.80848,,,0.013086795806884766

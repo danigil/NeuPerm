@@ -1,0 +1,5 @@
+model_name,method,accuracy,time
+mobilenet_v2,original,0.72148,0.0
+mobilenet_v2,neuperm,0.00102,0.0005190372467041016
+mobilenet_v2,neuperm,0.00078,0.0005426406860351562
+mobilenet_v2,neuperm,0.001,0.0005898475646972656

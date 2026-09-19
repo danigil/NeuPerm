@@ -1,0 +1,76 @@
+# NeuPerm payload provenance manifest
+#
+# WHAT THIS FILE IS
+# -----------------
+# The NeuPerm SNR evaluation (paper Section VIII-B, Table 5, Figure 3)
+# was computed on nine real malware samples, obfuscated on disk as XOR-with-0xFF
+# encoded files. Those live samples are NOT distributed with this artifact; they
+# are replaced by safe, deterministic synthetic substitutes under
+# `payloads/synthetic/`.
+#
+# This manifest records, for each of the nine original samples, the cryptographic
+# hashes that uniquely identify the exact bytes the published numbers were
+# computed on. It distributes NO malware: a SHA-256 is a one-way fingerprint, not
+# the sample. It gives an authorised researcher everything needed to obtain the
+# exact originals and reproduce Table 5 / Figure 3 to the decimal.
+#
+# HASH DEFINITIONS
+# ----------------
+#   xor_sha256   : SHA-256 of the stored bytes (each byte = plaintext ^ 0xFF),
+#                  i.e. the obfuscated on-disk form of the original sample.
+#   plain_sha256 : SHA-256 of the deobfuscated sample (stored ^ 0xFF). This is
+#                  the SHA-256 of the actual malware PE, and the value an
+#                  authorised researcher matches against a malware repository.
+#   length       : exact byte length of the sample (identical for both forms).
+#   entropy      : Shannon entropy (bits/byte) of the sample. XOR with a constant
+#                  is a byte-wise bijection, so the stored and deobfuscated forms
+#                  share one entropy value.
+#
+# The obfuscation key was verified in memory, not assumed: deobfuscating each
+# member with 0xFF yields a valid `MZ` DOS/PE header, confirming XOR-0xFF.
+# The malware bytes were never written to disk during this process.
+#
+# HOW AN AUTHORISED RESEARCHER OBTAINS THE ORIGINALS
+# --------------------------------------------------
+# These are well-known samples from public malware corpora (e.g. theZoo,
+# github.com/ytisf/theZoo, archive password `infected`; VirusShare; MalwareBazaar
+# by abuse.ch). Retrieve each sample by its `plain_sha256` below through your
+# institution's authorised malware-research channel, XOR-encode with 0xFF if you
+# wish to reproduce the exact on-disk `.xor` form, place the files in the
+# directory your run points `MALWARE_DIR` / `SNR_PAYLOADS` at, and re-run the
+# Section VIII-B SNR scripts. Distribution of the live samples is intentionally
+# out of scope for this artifact.
+#
+# SUBSTITUTES
+# -----------
+# `payloads/synthetic/` ships nine inert substitutes, one per sample, generated
+# by `payloads/synthetic/generate_substitutes.py` (seed=42). Each matches its
+# original's length exactly and its Shannon entropy closely, carries a
+# SYNTHETIC-NEUPERM banner, and contains no PE/ELF header. Their hashes are
+# listed in the SUBSTITUTES section so the shipped artifact is itself verifiable.
+# A few published numbers depend on payload CONTENT rather than only payload
+# LENGTH; those specific cells require the original samples to reproduce exactly.
+
+# ORIGINALS
+# --- name | length | entropy | xor_sha256 | plain_sha256 ---
+asprox       94208  6.2614  xor=f087321ac2869cbd891d92aa620f65968840709ed63d91232c16c0c1dae45a99  plain=4bb1d2130bb7ac35a03eb2f1eb483fc74103cea2086f3fc6984cb8724bcbcbfc
+bladabindi  107520  6.3721  xor=0e7e53bdda25bd8448b2b191076496679a567f5b77e61fe0cbeca6ea9586615c  plain=6f201afc797370ac6e33fafec41a794a2eb44c1bfd7d9079e3633ebe7bbb41e1
+cerber      619008  5.0924  xor=b66cb2215a1634a459118c289f34bfc0f2780e65094be28bc685c6c3fff39699  plain=e67834d1e8b38ec5864cfa101b140aeaba8f1900a6e269e6a94c90fcbfe56678
+destover     91888  5.7354  xor=f2158f1cb36da7c3cedb2a1acec5688b1f11e9b57581d2e3c5b18f0e9d0301dc  plain=4c2efe2f1253b94f16a1cab032f36c7883e4f6c8d9fc17d0ee553b5afb16330c
+eq.drug     380928  7.6325  xor=f34d96741d9d9a0bdcf654a5ccf880d1267c0d7367c5a4d9248ef2a53d46ba17  plain=1b0eb1a1591140175d1ac111a98c89472b196599baf13ef67ee7f63d0052b00e
+kovter      431884  7.4827  xor=db9c51b3a48cc11212fc6c1e75afb39be7631e1c78619e5aba6afd1da69e23fe  plain=40050153dceec2c8fbb1912f8eeabe449d1e265f0c8198008be8b34e5403e731
+stuxnet      24960  5.9975  xor=848183381c15788eefd3eba632e32e131506779e3a517f42d21d5dfb5c5346ad  plain=9d88425e266b3a74045186837fbd71de657b47d11efefcf8b3cd185a884b5306
+stuxnet_t     2000  5.2128  xor=037bff9f2ca7b0a03ceb3165648c87739cac3dda909261ffb02cefb1b8315f32  plain=ca646956f7c417b22e00c202ca706a0310f242e463293c94bd5b59c76f603b04
+stuxnet_t16  16000  5.9365  xor=d3d02df1f0f49fe2f4c3f3b3c0e2165aab04dcf0b302a803fc3aaab02ead24e0  plain=63bdcc4a8579b7f7f8fdc31587d17fce7eea9f52d1c4660a7916141a018cf9e5
+
+# SUBSTITUTES  (payloads/synthetic/<name>.xor ; generate_substitutes.py seed=42)
+# name | length | realized_entropy | xor_sha256 (stored) | decoded_sha256 (^0xFF plaintext)
+asprox       94208  6.2656  xor=d7a215015d0840a077d10e25500813c468f96a5db6bdadd99c259012019f216e  decoded=5cd6ef4503c31f9bf17081e1adfdc07519f2ed0301eb8094ee3f787c8892f2c9
+bladabindi  107520  6.3724  xor=58549c15be8e22abdce2dcac2f3f997511c0ff434ff4987bf9368bd13331a6c1  decoded=8141a7c15bf21035e97a39769787621a3676b56e48403f1efdd629b2bf6b4aae
+cerber      619008  5.0963  xor=874139b3941c863b65878e5abac19257023dca6caabc975994737a93a25c4e43  decoded=e86ff480f5d29c96e9141e88054a90ce2f2871ff02beb02bcff203216bb0b9b8
+destover     91888  5.7387  xor=10adf25c554ac2751c133a2b6e16d1ac6b57e2787a8e47d839c9385f0eb7c4ac  decoded=8f858416e07cdbf0f41f9cdc3e3bc0fd35f52b21ebfae414061222ffb707280e
+eq.drug     380928  7.6327  xor=017338509ca828034224a5322b4b021b56c6e6e26de167d32312d376cf8610f8  decoded=36a0309bb27392983361ce406d5ae8854be2aa89e1e9af1c2303ae4ac3913717
+kovter      431884  7.4861  xor=0471c21bc0a05c6c69ed5e8c1ab390da7431bb236b0ed31fa1fc45762fcd6078  decoded=57b156c7d7097854d753bc9e5ec07524cff39bfde8480d6505b7b9ca5c40f0c5
+stuxnet      24960  6.0145  xor=bd79efdf2fe069c704360c98578cb62d9f1d527baca17e02247cd262d6211032  decoded=8d7d0efc7c7cbfc6e8eaba0b6f1ee6c2a5de6885cc883a6b5ea45ed072fef8ca
+stuxnet_t     2000  5.3233  xor=f4941d2d0ae67a2c8301c4c57cc0ccbeaa76b2e274fc0badfb8a37c6fa41961c  decoded=c3843b4ff3da83fa5b1672595d4fbfec97ac272ea1e7629c8a32d09a7f904a48
+stuxnet_t16  16000  5.9723  xor=afd284164af1458ecd2b23fa4a96611217461e07cc186850ed98abb878d07486  decoded=b85c032285b675e9d316bb73d6cda4b4efb82abac6e7fedea536a9c337ac7c88

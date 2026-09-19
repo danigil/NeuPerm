@@ -1,0 +1,9 @@
+model_name,method,accuracy,n_bits,per_channel,time
+densenet121,original,0.7444,,,0.0
+densenet121,ptq_8bit_pertensor,0.72026,8.0,False,0.22878408432006836
+densenet121,ptq_8bit_perchannel,0.74342,8.0,True,0.22939801216125488
+densenet121,ptq_4bit_pertensor,0.0014,4.0,False,0.2299184799194336
+densenet121,ptq_4bit_perchannel,0.19878,4.0,True,0.22949814796447754
+densenet121,neuperm,0.74438,,,0.0048825740814208984
+densenet121,neuperm,0.74436,,,0.004305839538574219
+densenet121,neuperm,0.74436,,,0.004313230514526367

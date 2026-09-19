@@ -1,0 +1,6 @@
+model_name,method,accuracy,n_bits,per_channel,time
+vgg11,ptq_2bit_perchannel,0.001,2,True,
+vgg16,ptq_2bit_perchannel,0.001,2,True,
+resnet50,ptq_2bit_perchannel,0.001,2,True,
+resnet101,ptq_2bit_perchannel,0.001,2,True,
+densenet121,ptq_2bit_perchannel,0.001,2,True,
